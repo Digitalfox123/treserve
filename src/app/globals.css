@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0B1F33;
+  --color-navy-dark: #071524;
+  --color-navy-light: #162E47;
+  --color-primary: #1769E0;
+  --color-primary-hover: #1255B8;
+  --color-primary-light: #EBF3FE;
+  --color-cyan-accent: #08A6F6;
+  --color-pale-blue: #E8F2FF;
+  --color-main-bg: #F5F7FA;
+  --color-neutral-gray: #6B7280;
+  --color-border-gray: #E2E8F0;
+  --color-success: #15803D;
+  --color-success-light: #ECFDF5;
+  --color-warning: #B45309;
+  --color-error: #B91C1C;
+}
+
+:root {
+  --background: #F5F7FA;
+  --foreground: #0B1F33;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom travel badge and card helpers */
+.treserve-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px -2px rgba(11, 31, 51, 0.05);
+}
+
+.treserve-card-hover {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.treserve-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -4px rgba(11, 31, 51, 0.08);
+  border-color: #CBD5E1;
+}
+
+.badge-blue {
+  background-color: #E8F2FF;
+  color: #1769E0;
+  border: 1px solid rgba(23, 105, 224, 0.2);
+}
+
+.badge-green {
+  background-color: #ECFDF5;
+  color: #15803D;
+  border: 1px solid rgba(21, 128, 61, 0.2);
+}
