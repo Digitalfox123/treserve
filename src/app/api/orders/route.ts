@@ -3,8 +3,6 @@ import { createOrder, listAllOrders } from "@/lib/db";
 import { getPricingConfig } from "@/lib/pricing";
 import { z } from "zod";
 
-export const dynamic = "force-dynamic";
-
 const createOrderSchema = z.object({
   service_type: z.enum(["itinerary", "temporary_reservation"]),
   trip_type: z.enum(["one-way", "return", "multi-city"]).default("return"),
