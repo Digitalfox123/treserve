@@ -61,9 +61,9 @@ export default function ItineraryServicePage() {
 
             <div className="p-6 bg-[#E8F2FF]/60 rounded-2xl border border-[#1769E0]/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <span className="text-[11px] font-bold uppercase text-slate-400">Configured Demo Rate</span>
-                <div className="text-3xl font-black text-[#0B1F33]">$25.00 USD</div>
-                <p className="text-xs text-slate-500">Per traveler · Download unlocks upon test checkout</p>
+                <span className="text-[11px] font-bold uppercase text-slate-400">Fixed Rate</span>
+                <div className="text-3xl font-black text-[#0B1F33]">$10.00 USD</div>
+                <p className="text-xs text-slate-500">Per traveler · Instant PDF download upon booking</p>
               </div>
               <Link
                 href="/create?service=itinerary"

@@ -51,7 +51,7 @@ function CreateFlowContent() {
   const searchParams = useSearchParams();
 
   const pricing = getPricingConfig();
-  const reservationPrice = pricing.temporary_reservation?.price_usd || 35;
+  const reservationPrice = pricing.temporary_reservation?.price_usd || 10;
 
   // Initial values from query parameters
   const initialFrom = searchParams.get("from") || "Lahore (LHE)";
@@ -954,7 +954,7 @@ function CreateFlowContent() {
             <div className="space-y-3 text-xs">
               <div className="flex justify-between items-start">
                 <div>
-                  <div className="font-bold text-[#0B1F33]">Temporary Flight Reservation</div>
+                  <div className="font-bold text-[#0B1F33]">Visa Application Flight Reservation</div>
                   <div className="text-slate-400 text-[11px] capitalize">{tripType} trip · {cabinClass}</div>
                 </div>
                 <span className="font-bold text-[#0B1F33]">${currentPricePerPax}</span>

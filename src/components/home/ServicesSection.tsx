@@ -1,145 +1,141 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
-import { Plane, Compass, Globe2, ArrowRight, Check, ShieldCheck } from "lucide-react";
+import { Plane, ShieldCheck, Check, ArrowRight, Zap, Globe2, FileCheck2, Award } from "lucide-react";
 
 export function ServicesSection() {
-  const reservationServices = [
-    {
-      title: "Visa Application Flight Reservation",
-      tag: "Embassy Compliant",
-      tagColor: "bg-[#E8F2FF] text-[#1769E0] border-[#1769E0]/20",
-      icon: ShieldCheck,
-      iconBg: "bg-[#E8F2FF] text-[#1769E0]",
-      description:
-        "Official temporary flight reservation formatted strictly according to embassy and visa consulate requirements. Ideal for Schengen, US B1/B2, UK Standard Visitor, Canadian, and global visa appointments.",
-      features: [
-        "Verifiable airline flight schedule & timing",
-        "Official A4 vector PDF document",
-        "Unique internal booking reference & PNR hold",
-        "Accepted for visa appointment interviews",
-      ],
-      price: "$35",
-      ctaText: "Book Visa Reservation",
-      href: "/create?type=visa",
-    },
-    {
-      title: "Onward Travel & Return Reservation",
-      tag: "Border & Check-in Proof",
-      tagColor: "bg-emerald-50 text-emerald-700 border-emerald-300",
-      icon: Plane,
-      iconBg: "bg-emerald-50 text-emerald-600",
-      description:
-        "Instant onward travel reservation required by airlines and border control authorities before boarding visa-free or visa-on-arrival destinations across Southeast Asia, Europe, and the Americas.",
-      features: [
-        "Instant confirmation & document delivery",
-        "Satisfies airline departure verification",
-        "Direct airline carrier flight schedule",
-        "Valid proof of onward travel / return journey",
-      ],
-      price: "$35",
-      ctaText: "Book Onward Flight",
-      href: "/create?type=onward",
-    },
-    {
-      title: "Multi-City & Complex Route Reservation",
-      tag: "Multi-Leg Journeys",
-      tagColor: "bg-indigo-50 text-indigo-700 border-indigo-200",
-      icon: Globe2,
-      iconBg: "bg-indigo-50 text-indigo-600",
-      description:
-        "Comprehensive flight reservation covering multiple stops, extended layovers, and complex itineraries across multiple international carriers for long-term travel and multi-country visa filings.",
-      features: [
-        "Up to 4 connected flight legs & stopovers",
-        "Unified single PDF document layout",
-        "Multiple international airline carriers supported",
-        "Priority expedited document generation",
-      ],
-      price: "$50",
-      ctaText: "Book Multi-City",
-      href: "/create?tripType=multi-city",
-    },
+  const serviceChecklist = [
+    "Verifiable Airline Flight Number & Live Schedule",
+    "Legitimate PNR Booking Reference Code for Embassy Verification",
+    "Official A4 Vector PDF Format Ready for Consular Submission",
+    "Accepted by Schengen, US, UK, Canada, Australia & Global Visas",
+    "14–21 Days Active Reservation Hold Coverage",
+    "Instant PDF Download Right After Booking — No Account Needed",
+    "Zero Financial Risk — Never Buy Costly Tickets Before Visa Approval",
+    "Complies with Strict Embassy & VFS / TLScontact Guidelines",
+    "Valid for One-Way, Return & Connecting Multi-Leg Itineraries",
+    "Dedicated 24/7 Traveler Verification Support Assistance",
   ];
 
   return (
     <section id="services" className="pt-36 md:pt-44 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Section Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12">
-        <div>
-          <span className="text-xs uppercase font-extrabold tracking-wider text-[#1769E0] bg-[#E8F2FF] px-3 py-1 rounded-full">
-            RESERVATION SERVICES
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0B1F33] tracking-tight mt-3">
-            Verifiable Flight Reservations for Every Journey
-          </h2>
-          <p className="text-slate-600 text-xs sm:text-base mt-2 max-w-2xl leading-relaxed">
-            Choose the temporary flight reservation package tailored to your visa application or onward travel compliance needs.
-          </p>
-        </div>
-        <Link
-          href="/pricing"
-          className="inline-flex items-center space-x-1.5 text-xs sm:text-sm font-bold text-[#1769E0] hover:text-[#1255B8] mt-4 sm:mt-0 transition-colors"
-        >
-          <span>View Pricing Details</span>
-          <ArrowRight className="w-4 h-4" />
-        </Link>
+      <div className="text-center max-w-3xl mx-auto mb-14">
+        <span className="text-xs uppercase font-extrabold tracking-wider text-[#1769E0] bg-[#E8F2FF] px-3.5 py-1 rounded-full">
+          OUR CORE SPECIALIZATION
+        </span>
+        <h2 className="text-3xl sm:text-5xl font-black text-[#0B1F33] tracking-tight mt-3">
+          Visa Application Flight Reservation
+        </h2>
+        <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
+          Treserve specializes exclusively in legitimate, verifiable flight reservations designed specifically for visa interview appointments, embassy submissions, and proof of onward travel worldwide.
+        </p>
       </div>
 
-      {/* 3 Flight Reservation Packages */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {reservationServices.map((service) => {
-          const Icon = service.icon;
-          return (
-            <div
-              key={service.title}
-              className="treserve-card treserve-card-hover p-7 sm:p-8 flex flex-col justify-between relative overflow-hidden group bg-white border border-slate-200/90 rounded-3xl shadow-sm hover:shadow-xl transition-all"
-            >
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#1769E0] to-[#08A6F6]" />
+      {/* Single Large Executive Showcase Card */}
+      <div className="bg-white rounded-3xl border border-slate-200/90 shadow-lg p-8 sm:p-12 relative overflow-hidden">
+        {/* Top Accent Gradient Bar */}
+        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#1769E0] via-[#08A6F6] to-[#1769E0]" />
 
-              <div>
-                <div className="flex items-center justify-between mb-5">
-                  <div className={`w-12 h-12 rounded-2xl ${service.iconBg} flex items-center justify-center shadow-xs`}>
-                    <Icon className="w-6 h-6" />
-                  </div>
-                  <span className={`px-3 py-1 rounded-full text-[10px] font-bold border ${service.tagColor}`}>
-                    {service.tag}
-                  </span>
-                </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          {/* Left Column: Service Narrative & Pricing (5 cols) */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200/60">
+              <ShieldCheck className="w-4 h-4 text-emerald-600" />
+              <span>100% Embassy & Consular Compliant</span>
+            </div>
 
-                <h3 className="text-lg sm:text-xl font-bold text-[#0B1F33]">
-                  {service.title}
-                </h3>
-                <p className="text-slate-600 text-xs leading-relaxed mt-2.5">
-                  {service.description}
-                </p>
+            <div>
+              <h3 className="text-2xl sm:text-3xl font-black text-[#0B1F33] leading-snug">
+                Official Flight Reservation Hold for Visa Applicants
+              </h3>
+              <p className="text-slate-600 text-xs sm:text-sm mt-3 leading-relaxed">
+                Never risk buying an expensive, non-refundable flight ticket before your visa is approved. We provide legitimate flight reservations with live airline schedules, real flight numbers, and verifiable PNR codes accepted by embassies and visa processing centers worldwide.
+              </p>
+            </div>
 
-                <ul className="mt-6 space-y-2.5">
-                  {service.features.map((feat) => (
-                    <li key={feat} className="flex items-center space-x-2 text-xs font-medium text-slate-700">
-                      <div className="w-4 h-4 rounded-full bg-[#E8F2FF] text-[#1769E0] flex items-center justify-center shrink-0">
-                        <Check className="w-2.5 h-2.5" />
-                      </div>
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="pt-8 mt-6 border-t border-slate-100 flex items-center justify-between">
+            {/* Price Box */}
+            <div className="p-5 bg-slate-50 rounded-2xl border border-slate-200/80">
+              <div className="flex items-baseline justify-between">
                 <div>
-                  <span className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Fixed Rate</span>
-                  <div className="text-2xl font-black text-[#0B1F33]">{service.price}</div>
+                  <span className="text-4xl sm:text-5xl font-black text-[#0B1F33]">$10</span>
+                  <span className="text-slate-500 text-xs font-semibold ml-2">USD Flat Fee</span>
                 </div>
-                <Link
-                  href={service.href}
-                  className="inline-flex items-center space-x-1.5 px-4 sm:px-5 py-2.5 bg-[#1769E0] hover:bg-[#1255B8] text-white text-xs font-bold rounded-xl shadow-xs transition-colors"
-                >
-                  <span>{service.ctaText}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+                <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#E8F2FF] text-[#1769E0]">
+                  Instant Delivery
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-500 mt-2 font-medium">
+                One-time flat rate per person · No subscription · Download your PDF instantly
+              </p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-center gap-3">
+              <Link
+                href="/create"
+                className="w-full sm:w-auto flex-1 py-3.5 px-6 bg-[#1769E0] hover:bg-[#1255B8] text-white text-xs sm:text-sm font-bold rounded-xl shadow-md transition-all flex items-center justify-center space-x-2"
+              >
+                <span>Book Flight Reservation ($10)</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <a
+                href="#sample-itinerary"
+                className="w-full sm:w-auto py-3.5 px-5 bg-slate-100 hover:bg-slate-200 text-[#0B1F33] text-xs font-bold rounded-xl transition-colors text-center"
+              >
+                View Sample PDF
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column: Full Feature Checklist (7 cols) */}
+          <div className="lg:col-span-7 bg-slate-50/70 rounded-2xl p-6 sm:p-8 border border-slate-200/80 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200/60">
+              <div className="text-xs font-bold uppercase tracking-wider text-[#0B1F33] flex items-center space-x-2">
+                <FileCheck2 className="w-4 h-4 text-[#1769E0]" />
+                <span>What Is Included in Your Flight Reservation Report:</span>
+              </div>
+              <span className="text-[10px] text-emerald-700 bg-emerald-100 font-bold px-2 py-0.5 rounded-full">
+                Guaranteed Hold
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+              {serviceChecklist.map((item) => (
+                <div key={item} className="flex items-start space-x-2.5 text-xs font-medium text-slate-700">
+                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Consular Acceptance Badges */}
+            <div className="mt-6 pt-5 border-t border-slate-200/60">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-2.5">
+                Compliant With Visa Authorities Worldwide:
+              </span>
+              <div className="flex flex-wrap items-center gap-2">
+                {[
+                  "Schengen Visas (29 Countries)",
+                  "US B1/B2 Visitor",
+                  "UK Standard Visitor",
+                  "Canada TRV",
+                  "Australia Visitor 600",
+                  "Japan & Korea",
+                  "Onward Travel Proof",
+                ].map((badge) => (
+                  <span
+                    key={badge}
+                    className="text-[11px] font-semibold bg-white border border-slate-200 px-3 py-1 rounded-full text-slate-700 shadow-2xs"
+                  >
+                    ✓ {badge}
+                  </span>
+                ))}
               </div>
             </div>
-          );
-        })}
+          </div>
+        </div>
       </div>
     </section>
   );

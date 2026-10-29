@@ -151,9 +151,7 @@ function OrderDetailsContent() {
               </span>
             </div>
             <h1 className="text-2xl font-black text-[#0B1F33] mt-2">
-              {order.service_type === "temporary_reservation"
-                ? "Temporary Flight Reservation Document"
-                : "Flight Itinerary Document"}
+              Visa Application Flight Reservation Document
             </h1>
             <p className="text-xs text-slate-500 mt-1">
               Created on {order.created_at ? order.created_at.slice(0, 10) : "2026-10-26"} · Delivery to {order.guest_email}

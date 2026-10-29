@@ -27,7 +27,7 @@ export async function generateOrderPdf(order: Order): Promise<Uint8Array> {
   const softEmeraldBg = rgb(236 / 255, 253 / 255, 245 / 255); // #ECFDF5
 
   const isReservation = true;
-  const docTitle = "TEMPORARY FLIGHT RESERVATION";
+  const docTitle = "VISA APPLICATION FLIGHT RESERVATION";
   const statusLabel = "CONFIRMED HOLD (VERIFIABLE VISA PROOF)";
 
   const marginX = 42;

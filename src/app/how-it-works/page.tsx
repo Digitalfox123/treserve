@@ -9,14 +9,14 @@ export default function HowItWorksPage() {
   const detailedSteps = [
     {
       num: "01",
-      title: "Choose Your Service",
-      icon: FileText,
+      title: "Select Flight Route & Dates",
+      icon: Plane,
       description:
-        "Select between a Flight Itinerary Document ($25) or a Temporary Flight Reservation ($50). Both are structured specifically for visa applications and travel planning.",
+        "We provide a dedicated Visa Application Flight Reservation service for a single flat rate of $10 USD. Enter your departure city, destination airport, and travel dates.",
       details: [
-        "Transparent pricing with no recurring fees",
-        "Clear distinction between itinerary planning and held supplier reservations",
-        "Guidance on which format aligns with embassy documentation rules",
+        "Single transparent $10 USD flat rate with no recurring fees",
+        "Official held flight reservation formatted strictly for visa submissions",
+        "Direct live schedule lookup with major international airlines",
       ],
     },
     {

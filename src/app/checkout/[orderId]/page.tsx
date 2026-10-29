@@ -247,11 +247,7 @@ function CheckoutContent() {
                   ) : (
                     <FileText className="w-4 h-4 text-[#1769E0]" />
                   )}
-                  <span>
-                    {order.service_type === "temporary_reservation"
-                      ? "Temporary Flight Reservation"
-                      : "Flight Itinerary Document"}
-                  </span>
+                  <span>Visa Application Flight Reservation</span>
                 </div>
               </div>
 

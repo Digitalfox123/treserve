@@ -64,9 +64,9 @@ export default function TemporaryReservationServicePage() {
 
             <div className="p-6 bg-emerald-50/60 rounded-2xl border border-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <span className="text-[11px] font-bold uppercase text-slate-400">Configured Demo Rate</span>
-                <div className="text-3xl font-black text-[#0B1F33]">$50.00 USD</div>
-                <p className="text-xs text-slate-500">Per traveler · Delivery 1–48 hours</p>
+                <span className="text-[11px] font-bold uppercase text-slate-400">Fixed Rate</span>
+                <div className="text-3xl font-black text-[#0B1F33]">$10.00 USD</div>
+                <p className="text-xs text-slate-500">Per traveler · Instant PDF download upon booking</p>
               </div>
               <Link
                 href="/create?service=temporary_reservation"

@@ -57,9 +57,7 @@ export async function GET(
     // Generate high quality vector A4 PDF
     const pdfBytes = await generateOrderPdf(order);
 
-    const filename = `${
-      order.service_type === "temporary_reservation" ? "Temporary-Reservation" : "Flight-Itinerary"
-    }-${order.internal_reference}.pdf`;
+    const filename = `Visa-Flight-Reservation-${order.internal_reference}.pdf`;
 
     return new NextResponse(Buffer.from(pdfBytes), {
       status: 200,
@@ -114,9 +112,7 @@ export async function POST(
     }
 
     const pdfBytes = await generateOrderPdf(order);
-    const filename = `${
-      order.service_type === "temporary_reservation" ? "Temporary-Reservation" : "Flight-Itinerary"
-    }-${order.internal_reference}.pdf`;
+    const filename = `Visa-Flight-Reservation-${order.internal_reference}.pdf`;
 
     return new NextResponse(Buffer.from(pdfBytes), {
       status: 200,
