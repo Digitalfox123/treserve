@@ -3,6 +3,8 @@ import { createOrder, listAllOrders } from "@/lib/db";
 import { getPricingConfig } from "@/lib/pricing";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+
 const createOrderSchema = z.object({
   service_type: z.enum(["itinerary", "temporary_reservation"]),
   trip_type: z.enum(["one-way", "return", "multi-city"]).default("return"),
@@ -145,9 +147,31 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    const { searchParams } = new URL(request.url);
+    const ref = searchParams.get("reference") || searchParams.get("ref");
+    const email = searchParams.get("email");
+
     const orders = await listAllOrders();
+
+    if (ref) {
+      const match = orders.find((o) => {
+        const matchesRef =
+          o.internal_reference.toLowerCase() === ref.trim().toLowerCase() ||
+          o.id.toLowerCase() === ref.trim().toLowerCase();
+        const matchesEmail = email
+          ? (o.guest_email?.toLowerCase() === email.trim().toLowerCase())
+          : true;
+        return matchesRef && matchesEmail;
+      });
+
+      if (!match) {
+        return NextResponse.json({ error: "No matching reservation record found." }, { status: 404 });
+      }
+      return NextResponse.json({ order: match });
+    }
+
     return NextResponse.json({ orders });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Failed to list orders";

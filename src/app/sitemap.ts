@@ -4,26 +4,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://treserve.com";
 
   const publicRoutes = [
-    "",
-    "/services",
-    "/itinerary",
-    "/temporary-reservation",
-    "/how-it-works",
-    "/pricing",
-    "/faqs",
-    "/contact",
-    "/sign-in",
-    "/register",
-    "/terms",
-    "/privacy",
-    "/refund-policy",
-    "/disclaimer",
+    { path: "", changeFrequency: "daily" as const, priority: 1.0 },
+    { path: "/create", changeFrequency: "daily" as const, priority: 0.95 },
+    { path: "/services", changeFrequency: "weekly" as const, priority: 0.9 },
+    { path: "/temporary-reservation", changeFrequency: "weekly" as const, priority: 0.9 },
+    { path: "/manage-booking", changeFrequency: "daily" as const, priority: 0.85 },
+    { path: "/pricing", changeFrequency: "weekly" as const, priority: 0.85 },
+    { path: "/how-it-works", changeFrequency: "weekly" as const, priority: 0.8 },
+    { path: "/faqs", changeFrequency: "weekly" as const, priority: 0.8 },
+    { path: "/contact", changeFrequency: "monthly" as const, priority: 0.7 },
+    { path: "/terms", changeFrequency: "monthly" as const, priority: 0.5 },
+    { path: "/privacy", changeFrequency: "monthly" as const, priority: 0.5 },
+    { path: "/refund-policy", changeFrequency: "monthly" as const, priority: 0.5 },
+    { path: "/disclaimer", changeFrequency: "monthly" as const, priority: 0.5 },
   ];
 
   return publicRoutes.map((route) => ({
-    url: `${baseUrl}${route}`,
+    url: `${baseUrl}${route.path}`,
     lastModified: new Date(),
-    changeFrequency: route === "" ? "daily" : "weekly",
-    priority: route === "" ? 1.0 : route.startsWith("/services") ? 0.9 : 0.7,
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
   }));
 }

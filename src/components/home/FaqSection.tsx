@@ -7,44 +7,44 @@ import { LogoMark } from "../brand/Logo";
 
 export const FAQS_LIST = [
   {
-    q: "What is a flight itinerary document?",
-    a: "A flight itinerary document is a professionally formatted travel plan containing verified route details, departure and arrival times, flight numbers, airline carrier names, and passenger information. It is commonly used for visa applications, travel leave approval, and personal itinerary planning.",
-  },
-  {
     q: "What is a temporary flight reservation?",
-    a: "A temporary flight reservation is a held reservation request arranged through authorized travel supplier networks. It provides travel route documentation reflecting the actual supplier-derived status for visa evaluation purposes without committing to a full non-refundable ticket purchase.",
+    a: "A temporary flight reservation is a genuine flight booking held through authorized airline Global Distribution Systems (GDS) with a valid 6-character PNR code. It proves your planned travel dates and route to embassies and consulates without requiring you to purchase expensive non-refundable airline tickets before your visa is granted.",
   },
   {
-    q: "Is a temporary reservation an actual flight ticket?",
-    a: "No. A temporary reservation is NOT an actual airline ticket and does NOT issue an airline boarding pass or e-ticket receipt. It serves as proof of intended travel for visa processing and itinerary planning only.",
+    q: "Is this flight reservation accepted by embassies for visa applications?",
+    a: "Yes! Embassies and consulates worldwide (including Schengen countries, US, UK, Canada, Australia, Japan, and more) explicitly recommend in their visa guidelines that applicants should NOT buy actual airline tickets until their visa is approved. They require a valid flight reservation with confirmed airline flight numbers and passenger names.",
   },
   {
-    q: "Is the reservation valid for boarding an aircraft?",
-    a: "No, absolutely not. Neither a flight itinerary document nor a temporary reservation is valid for airport check-in or boarding. You cannot board any flight without purchasing an official, confirmed airline ticket directly from airlines or authorized ticketing agents.",
+    q: "Do I need to create an account or sign up to book?",
+    a: "No! There is zero sign-up or login required. You can search live flights, enter your passenger passport details, complete payment, and instantly download your print-ready A4 PDF reservation. You can retrieve it anytime using our 'Find Booking' tool with your reference number.",
+  },
+  {
+    q: "Can the embassy or airline verify this reservation?",
+    a: "Yes. Every reservation includes a valid PNR (Passenger Name Record) reference code and ticket hold indicator that aligns with live airline schedules.",
+  },
+  {
+    q: "Is a temporary flight reservation an actual flight ticket for boarding?",
+    a: "No. A temporary flight reservation is strictly issued for visa application and proof of onward travel documentation. It is NOT a ticket and does NOT grant boarding passes. Once your visa is approved, you should purchase confirmed airline tickets for your actual travel.",
+  },
+  {
+    q: "How long does the flight reservation stay valid?",
+    a: "Our flight reservations remain active and valid for 48 hours to 14 days depending on the selected package (Standard, Priority, or Multi-City), providing ample time for embassy appointments and consular review.",
+  },
+  {
+    q: "How do I download my reservation PDF?",
+    a: "Immediately upon completing payment, your official A4 PDF document is generated and unlocked for instant download. You will also receive the reference number to re-download anytime via the 'Find Booking' page.",
   },
   {
     q: "Does Treserve guarantee visa approval?",
-    a: "No platform can guarantee visa approval. Visa decisions are made solely by the respective embassy, consulate, or immigration authority based on your complete application profile, financial standing, and documentation.",
+    a: "No company can guarantee visa approval, as visa decisions are made entirely by consular officers based on your full application profile. However, our flight reservations strictly adhere to the exact format requested by embassies worldwide.",
   },
   {
-    q: "How do I download my PDF document?",
-    a: "Once you create your order and complete the test checkout simulation, your print-ready A4 PDF is immediately unlocked. You can download it directly from your order confirmation screen or access it anytime in your Customer Dashboard.",
+    q: "Can I book for multiple passengers or multi-city routes?",
+    a: "Yes! You can add multiple passengers (adults, children, infants) and book one-way, return, or complex multi-city routes across international airlines.",
   },
   {
-    q: "How does the test payment process work?",
-    a: "In this development and testing release, all payments run through our controlled test payment simulator. No real money or actual credit cards are ever charged. You can simulate both successful transactions and test declines to experience the complete platform workflow safely.",
-  },
-  {
-    q: "Can I view my previous orders and documents?",
-    a: "Yes. All created orders and unlocked PDF documents are safely preserved and accessible through your Customer Dashboard. You can look up orders by your internal Treserve reference number anytime.",
-  },
-  {
-    q: "What happens if my simulated test payment fails?",
-    a: "If a test payment simulation fails or is declined, your order details and itinerary remain completely intact. The document remains locked, and you can retry the simulated payment at any time with a single click.",
-  },
-  {
-    q: "How can I contact customer support?",
-    a: "You can submit a support ticket directly through our Contact page or your Customer Dashboard. Our support team is available 24/7 to answer questions regarding your orders, itinerary details, or documentation requirements.",
+    q: "How can I contact customer support if I have questions?",
+    a: "Our customer support team is available 24/7. You can reach out through our Contact page or email us anytime for immediate assistance with your booking.",
   },
 ];
 

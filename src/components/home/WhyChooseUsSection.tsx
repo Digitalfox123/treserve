@@ -20,13 +20,13 @@ export function WhyChooseUsSection() {
       icon: Calendar,
     },
     {
-      title: "Instant Document Access",
-      description: "Download your professionally typeset vector A4 PDF immediately upon simulated payment completion.",
+      title: "Instant PDF & PNR Access",
+      description: "Download your professionally typeset vector A4 PDF immediately upon payment completion without needing an account.",
       icon: Zap,
     },
     {
       title: "Dedicated Support",
-      description: "Accessible assistance and dedicated support to guide you through your travel document needs.",
+      description: "Accessible assistance and dedicated support to guide you through your flight reservation and visa requirements.",
       icon: Headphones,
     },
   ];
@@ -52,17 +52,17 @@ export function WhyChooseUsSection() {
                 Peace of Mind
               </span>
               <h3 className="text-xl sm:text-2xl font-extrabold mt-2 tracking-tight">
-                Travel Documentation, Simplified
+                Flight Reservations, Simplified
               </h3>
               <p className="text-xs sm:text-sm text-slate-200 mt-1 max-w-md">
-                We make travel planning simple, secure, and stress-free for visa applicants and travelers across the globe.
+                We make flight reservations simple, secure, and stress-free for visa applicants and travelers worldwide.
               </p>
 
               {/* Verified Trust Pillars */}
               <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-white/20 text-center">
                 <div>
                   <div className="text-sm font-extrabold text-white">100%</div>
-                  <div className="text-[10px] text-slate-300">Transparent Terms</div>
+                  <div className="text-[10px] text-slate-300">Embassy Verified</div>
                 </div>
                 <div>
                   <div className="text-sm font-extrabold text-white">A4 Vector</div>
@@ -87,8 +87,8 @@ export function WhyChooseUsSection() {
               Built on transparency, precision, and trust
             </h2>
             <p className="text-slate-500 text-sm mt-2 leading-relaxed">
-              We focus specifically on documentation clarity and legitimate temporary reservation procedures,
-              giving you reliable documentation without hidden surprises.
+              We focus specifically on verifiable temporary flight reservations with live airline PNR codes,
+              giving you reliable documentation without buying expensive non-refundable air tickets.
             </p>
           </div>
 

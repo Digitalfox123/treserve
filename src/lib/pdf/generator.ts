@@ -26,14 +26,9 @@ export async function generateOrderPdf(order: Order): Promise<Uint8Array> {
   const emerald = rgb(16 / 255, 122 / 255, 71 / 255); // #107A47
   const softEmeraldBg = rgb(236 / 255, 253 / 255, 245 / 255); // #ECFDF5
 
-  const isReservation = order.service_type === "temporary_reservation";
-  const docTitle = isReservation
-    ? "TEMPORARY FLIGHT RESERVATION"
-    : "FLIGHT ITINERARY DOCUMENT";
-
-  const statusLabel = isReservation
-    ? "CONFIRMED HOLD (VISA PROOF)"
-    : "VERIFIED FLIGHT ITINERARY";
+  const isReservation = true;
+  const docTitle = "TEMPORARY FLIGHT RESERVATION";
+  const statusLabel = "CONFIRMED HOLD (VERIFIABLE VISA PROOF)";
 
   const marginX = 42;
   const contentWidth = pageWidth - marginX * 2;

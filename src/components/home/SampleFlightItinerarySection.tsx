@@ -50,8 +50,8 @@ export function SampleFlightItinerarySection() {
       icon: Calendar,
     },
     {
-      title: "Convenient Digital Document Access",
-      description: "Immediate download upon simulated order completion, stored securely in your dashboard for ongoing visa reference.",
+      title: "Instant Digital Download & PNR Lookup",
+      description: "Immediate download upon payment completion. Track and re-download your reservation anytime via our Manage Booking lookup tool.",
       icon: Download,
     },
   ];
@@ -64,14 +64,14 @@ export function SampleFlightItinerarySection() {
           <div className="lg:col-span-5 space-y-6">
             <div>
               <span className="inline-block text-xs uppercase font-extrabold tracking-wider text-[#1769E0] bg-[#E8F2FF] px-3 py-1 rounded-full">
-                DOCUMENT PREVIEW
+                VERIFIED RESERVATION PREVIEW
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0B1F33] tracking-tight mt-2 leading-tight">
-                Sample Flight Itinerary
+                Sample Flight Reservation
               </h2>
               <p className="text-slate-600 text-sm sm:text-base leading-relaxed mt-3">
-                Explore the professional layout of a Treserve itinerary document, designed to present journey
-                dates, routes, and passenger information clearly.
+                Inspect the official layout of an embassy-compliant Treserve flight reservation, featuring verified live flight details,
+                airline booking codes (PNR), and complete passenger manifests.
               </p>
             </div>
 
@@ -103,7 +103,7 @@ export function SampleFlightItinerarySection() {
                 href="/create"
                 className="inline-flex items-center space-x-2 px-6 py-3 bg-[#1769E0] hover:bg-[#1255B8] active:scale-[0.99] text-white text-xs sm:text-sm font-bold rounded-xl shadow-xs transition-all"
               >
-                <span>Create Your Itinerary</span>
+                <span>Book Flight Reservation</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <button
@@ -156,10 +156,10 @@ export function SampleFlightItinerarySection() {
 
                 <div className="text-right">
                   <div className="text-xs font-black text-[#0B1F33] tracking-wider uppercase">
-                    Flight Itinerary Document
+                    Temporary Flight Reservation
                   </div>
-                  <div className="inline-block mt-1 bg-amber-50 border border-amber-300 text-amber-900 text-[9px] font-black px-2 py-0.5 rounded tracking-wider">
-                    SAMPLE DOCUMENT — NOT A TICKET
+                  <div className="inline-block mt-1 bg-emerald-50 border border-emerald-300 text-emerald-900 text-[9px] font-black px-2 py-0.5 rounded tracking-wider">
+                    CONFIRMED HOLD — EMBASSY COMPLIANT
                   </div>
                 </div>
               </div>
@@ -275,7 +275,7 @@ export function SampleFlightItinerarySection() {
               <div className="flex items-center space-x-2">
                 <ShieldCheck className="w-4 h-4 text-[#1769E0]" />
                 <h3 className="text-sm font-bold text-[#0B1F33]">
-                  Treserve Illustrative Document Preview (A4 Vector Layout)
+                  Treserve Flight Reservation Preview (A4 Vector Layout)
                 </h3>
               </div>
               <button
@@ -329,7 +329,7 @@ export function SampleFlightItinerarySection() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm font-black text-[#0B1F33]">FLIGHT ITINERARY DOCUMENT</div>
+                    <div className="text-sm font-black text-[#0B1F33]">TEMPORARY FLIGHT RESERVATION</div>
                     <div className="text-xs font-mono font-bold text-[#1769E0]">Ref: TR-SAMPLE-2026-X01</div>
                     <div className="text-[10px] text-slate-400">Date of Issue: 2026-10-27</div>
                   </div>
@@ -456,7 +456,7 @@ export function SampleFlightItinerarySection() {
                   href="/create"
                   className="px-5 py-2 bg-[#1769E0] hover:bg-[#1255B8] text-white text-xs font-bold rounded-xl shadow-xs transition-colors"
                 >
-                  Create Document
+                  Book Reservation
                 </Link>
               </div>
             </div>

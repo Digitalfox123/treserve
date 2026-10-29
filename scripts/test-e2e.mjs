@@ -24,8 +24,8 @@ async function runTests() {
     assert(homeRes.status === 200, "Homepage returns 200 OK");
     assert(homeHtml.includes("Treserve"), "Homepage contains 'Treserve'");
     assert(homeHtml.includes("Plan Today"), "Homepage contains 'Plan Today'");
-    assert(homeHtml.includes("Flight Itinerary Document"), "Homepage includes Flight Itinerary service card");
-    assert(homeHtml.includes("Temporary Flight Reservation"), "Homepage includes Temporary Reservation service card");
+    assert(homeHtml.includes("Visa Application Flight Reservation"), "Homepage includes Flight Reservation service tier");
+    assert(homeHtml.includes("Temporary Flight Reservation"), "Homepage includes Temporary Reservation");
     assert(
       homeHtml.includes("Our service provides temporary reservations for visa documentation only"),
       "Homepage includes exact mandatory visa disclaimer"

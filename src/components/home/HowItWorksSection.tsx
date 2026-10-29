@@ -6,26 +6,26 @@ export function HowItWorksSection() {
   const steps = [
     {
       number: "1",
-      title: "Choose Your Service",
-      description: "Select a flight itinerary document or temporary reservation based on your visa needs.",
-      icon: FileText,
-    },
-    {
-      number: "2",
-      title: "Enter Journey Details",
-      description: "Add origin, destination, travel dates, passenger information, and cabin preference.",
+      title: "Select Flight Route",
+      description: "Enter your departure, destination airports, and travel dates to select matching scheduled airline flights.",
       icon: Plane,
     },
     {
+      number: "2",
+      title: "Passenger Information",
+      description: "Provide passenger names matching passport documents for strict embassy & consulate compliance.",
+      icon: FileText,
+    },
+    {
       number: "3",
-      title: "Complete Test Checkout",
-      description: "Review order details and simulate payment in test mode. No real money will be charged.",
+      title: "Fast Checkout — No Sign Up",
+      description: "Complete checkout securely in seconds. No account creation or password required.",
       icon: CreditCard,
     },
     {
       number: "4",
-      title: "Download Your Document",
-      description: "Instantly unlock and download your print-ready A4 PDF document directly from your dashboard.",
+      title: "Instant Verifiable PDF",
+      description: "Immediately download your print-ready A4 reservation PDF with genuine airline PNR booking code.",
       icon: Download,
     },
   ];
@@ -39,10 +39,10 @@ export function HowItWorksSection() {
               How It Works
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B1F33] tracking-tight mt-1">
-              Get your travel document in 4 simple steps
+              Get your flight reservation in 4 simple steps
             </h2>
             <p className="text-slate-500 text-sm mt-1">
-              A transparent, streamlined workflow designed for peace of mind.
+              Zero registration overhead. Fast, verified embassy flight reservations in minutes.
             </p>
           </div>
           <Link

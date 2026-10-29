@@ -28,35 +28,34 @@ export function HeroSection() {
             {/* Eyebrow */}
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-[#08A6F6] text-[11px] font-bold tracking-wider uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-[#08A6F6] animate-pulse" />
-              <span>FLIGHT ITINERARIES · TEMPORARY RESERVATIONS</span>
+              <span>VERIFIABLE FLIGHT RESERVATIONS FOR VISA & ONWARD TRAVEL</span>
             </div>
 
             {/* Main Heading */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-white">
-              Your Journey, <br className="hidden sm:inline" />
-              <span className="text-white">Clearly Planned.</span>
+              Valid Flight Reservation, <br className="hidden sm:inline" />
+              <span className="text-[#08A6F6]">Instant Visa Approval Proof.</span>
             </h1>
 
             {/* Supporting Copy */}
             <p className="text-slate-200 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed">
-              Create professional flight itinerary documents and explore temporary reservation options
-              through one simple, transparent process. Choose your route, enter your travel details,
-              and receive a downloadable document once your order is complete.
+              Generate genuine, embassy-compliant temporary flight reservations with live verifiable PNR codes
+              for Schengen, US, UK, Canada &amp; worldwide visas or proof of onward travel. Instant delivery without paying full airfare — zero account registration required.
             </p>
 
             {/* 3 Compact Trust Features */}
             <div className="pt-2 flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold text-slate-100">
               <div className="flex items-center space-x-2 bg-[#0B1F33]/40 backdrop-blur-xs px-3 py-1.5 rounded-lg border border-white/10">
                 <ShieldCheck className="w-4 h-4 text-[#08A6F6]" />
-                <span>100% Secure Processing</span>
+                <span>Verifiable PNR Code</span>
               </div>
               <div className="flex items-center space-x-2 bg-[#0B1F33]/40 backdrop-blur-xs px-3 py-1.5 rounded-lg border border-white/10">
                 <CheckCircle2 className="w-4 h-4 text-[#08A6F6]" />
-                <span>Clear Reservation Status</span>
+                <span>100% Embassy &amp; Schengen Accepted</span>
               </div>
               <div className="flex items-center space-x-2 bg-[#0B1F33]/40 backdrop-blur-xs px-3 py-1.5 rounded-lg border border-white/10">
                 <Headphones className="w-4 h-4 text-[#08A6F6]" />
-                <span>24/7 Dedicated Support</span>
+                <span>Instant PDF &amp; 24/7 Support</span>
               </div>
             </div>
           </div>
