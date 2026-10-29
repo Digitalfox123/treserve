@@ -45,15 +45,56 @@ function CheckoutContent() {
 
   useEffect(() => {
     async function fetchOrder() {
+      // 1. Immediately check local cache so the page renders with zero delay
+      let clientCachedOrder: Order | null = null;
+      if (typeof window !== "undefined") {
+        try {
+          const cached =
+            localStorage.getItem(`treserve_order_${orderId}`) ||
+            sessionStorage.getItem(`treserve_order_${orderId}`) ||
+            localStorage.getItem("treserve_last_order");
+          if (cached) {
+            const parsed = JSON.parse(cached);
+            if (parsed && (parsed.id === orderId || parsed.internal_reference === orderId)) {
+              clientCachedOrder = parsed;
+              setOrder(parsed);
+              setLoading(false);
+            }
+          }
+        } catch {
+          // ignore cache read error
+        }
+      }
+
+      // 2. Fetch authoritative data from server / Supabase
       try {
         const res = await fetch(`/api/orders/${orderId}`);
         const data = await res.json();
-        if (!res.ok) {
+        if (res.ok && data.order) {
+          setOrder(data.order);
+          setFetchError(null);
+          if (typeof window !== "undefined") {
+            try {
+              localStorage.setItem(`treserve_order_${data.order.id}`, JSON.stringify(data.order));
+              localStorage.setItem("treserve_last_order", JSON.stringify(data.order));
+            } catch {
+              // ignore
+            }
+          }
+        } else if (!clientCachedOrder) {
           throw new Error(data.error || "Order not found");
+        } else {
+          // Serverless instance didn't have the order in memory/disk; re-sync from client cache
+          fetch("/api/orders/sync", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ order: clientCachedOrder }),
+          }).catch(() => {});
         }
-        setOrder(data.order);
       } catch (err: unknown) {
-        setFetchError(err instanceof Error ? err.message : "Failed to load order");
+        if (!clientCachedOrder) {
+          setFetchError(err instanceof Error ? err.message : "Failed to load order");
+        }
       } finally {
         setLoading(false);
       }
@@ -79,6 +120,7 @@ function CheckoutContent() {
           order_id: order.id,
           scenario: selectedScenario,
           terms_accepted: termsAccepted,
+          order_backup: order,
         }),
       });
 
@@ -95,6 +137,14 @@ function CheckoutContent() {
         });
         // Refresh local order state
         setOrder(data.order);
+        if (typeof window !== "undefined" && data.order) {
+          try {
+            localStorage.setItem(`treserve_order_${data.order.id}`, JSON.stringify(data.order));
+            localStorage.setItem("treserve_last_order", JSON.stringify(data.order));
+          } catch {
+            // ignore
+          }
+        }
       } else {
         setPaymentResult({
           success: false,

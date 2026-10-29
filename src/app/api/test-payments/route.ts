@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getOrderById, updateOrderStatus, recordPaymentEvent } from "@/lib/db";
+import { getOrderById, updateOrderStatus, recordPaymentEvent, upsertOrder } from "@/lib/db";
 import { z } from "zod";
 
 const testPaymentSchema = z.object({
@@ -8,14 +8,13 @@ const testPaymentSchema = z.object({
   terms_accepted: z.boolean().refine((val) => val === true, {
     message: "Terms and visa disclaimer must be accepted before proceeding.",
   }),
+  order_backup: z.any().optional(),
 });
 
 export async function POST(request: NextRequest) {
   try {
-    // 1. Verify environment test-mode eligibility
-    const isTestModeAllowed =
-      process.env.NEXT_PUBLIC_TEST_MODE === "true" ||
-      process.env.NODE_ENV !== "production";
+    // 1. Verify environment test-mode eligibility (enabled unless explicitly set to "false")
+    const isTestModeAllowed = process.env.NEXT_PUBLIC_TEST_MODE !== "false";
 
     if (!isTestModeAllowed) {
       return NextResponse.json(
@@ -34,10 +33,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { order_id, scenario } = parsed.data;
+    const { order_id, scenario, order_backup } = parsed.data;
 
-    // 2. Fetch order from server-side store/database (never trust client amounts)
-    const order = await getOrderById(order_id);
+    // 2. Fetch order from server-side store/storage
+    let order = await getOrderById(order_id);
+
+    // If order was missing due to cross-instance cold start, restore from client backup if valid
+    if (!order && order_backup && order_backup.id === order_id) {
+      order = await upsertOrder(order_backup);
+    }
+
     if (!order) {
       return NextResponse.json({ error: "Order record not found" }, { status: 404 });
     }
@@ -49,6 +54,7 @@ export async function POST(request: NextRequest) {
           error: "Order is already paid.",
           order_status: order.order_status,
           internal_reference: order.internal_reference,
+          download_url: `/api/documents/${order.id}/download`,
         },
         { status: 400 }
       );

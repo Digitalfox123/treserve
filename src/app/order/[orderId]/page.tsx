@@ -33,13 +33,53 @@ function OrderDetailsContent() {
 
   useEffect(() => {
     async function fetchOrder() {
+      let clientCachedOrder: Order | null = null;
+      if (typeof window !== "undefined") {
+        try {
+          const cached =
+            localStorage.getItem(`treserve_order_${orderId}`) ||
+            sessionStorage.getItem(`treserve_order_${orderId}`) ||
+            localStorage.getItem("treserve_last_order");
+          if (cached) {
+            const parsed = JSON.parse(cached);
+            if (parsed && (parsed.id === orderId || parsed.internal_reference === orderId)) {
+              clientCachedOrder = parsed;
+              setOrder(parsed);
+              setLoading(false);
+            }
+          }
+        } catch {
+          // ignore cache read error
+        }
+      }
+
       try {
         const res = await fetch(`/api/orders/${orderId}`);
         const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "Order not found");
-        setOrder(data.order);
+        if (res.ok && data.order) {
+          setOrder(data.order);
+          setError(null);
+          if (typeof window !== "undefined") {
+            try {
+              localStorage.setItem(`treserve_order_${data.order.id}`, JSON.stringify(data.order));
+            } catch {
+              // ignore
+            }
+          }
+        } else if (!clientCachedOrder) {
+          throw new Error(data.error || "Order not found");
+        } else {
+          // Sync client order to serverless instance
+          fetch("/api/orders/sync", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ order: clientCachedOrder }),
+          }).catch(() => {});
+        }
       } catch (err: unknown) {
-        setError(err instanceof Error ? err.message : "Failed to load order");
+        if (!clientCachedOrder) {
+          setError(err instanceof Error ? err.message : "Failed to load order");
+        }
       } finally {
         setLoading(false);
       }

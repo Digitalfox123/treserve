@@ -18,6 +18,9 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error: any) {
+    if (error?.digest?.startsWith("NEXT_")) {
+      throw error;
+    }
     console.error("Flight search API error:", error);
     return NextResponse.json(
       {

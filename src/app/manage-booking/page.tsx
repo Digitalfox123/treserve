@@ -49,6 +49,42 @@ export default function ManageBookingPage() {
       const data = await res.json();
 
       if (!res.ok || !data.order) {
+        // Fallback to local cache lookup if server instance is fresh
+        let foundInCache: Order | null = null;
+        if (typeof window !== "undefined") {
+          try {
+            for (let i = 0; i < localStorage.length; i++) {
+              const key = localStorage.key(i);
+              if (key && (key.startsWith("treserve_order_") || key === "treserve_last_order")) {
+                const item = localStorage.getItem(key);
+                if (item) {
+                  const parsed = JSON.parse(item);
+                  if (
+                    parsed &&
+                    (parsed.internal_reference?.toLowerCase() === reference.trim().toLowerCase() ||
+                      parsed.id?.toLowerCase() === reference.trim().toLowerCase())
+                  ) {
+                    foundInCache = parsed;
+                    break;
+                  }
+                }
+              }
+            }
+          } catch {
+            // ignore
+          }
+        }
+
+        if (foundInCache) {
+          setOrder(foundInCache);
+          fetch("/api/orders/sync", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ order: foundInCache }),
+          }).catch(() => {});
+          return;
+        }
+
         throw new Error(data.error || "No reservation found matching this booking reference and email.");
       }
 

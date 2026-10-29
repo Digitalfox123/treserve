@@ -281,6 +281,16 @@ function CreateFlowContent() {
         throw new Error(data.error || "Failed to create reservation order.");
       }
 
+      if (typeof window !== "undefined" && data.order) {
+        try {
+          localStorage.setItem(`treserve_order_${data.order.id}`, JSON.stringify(data.order));
+          localStorage.setItem("treserve_last_order", JSON.stringify(data.order));
+          sessionStorage.setItem(`treserve_order_${data.order.id}`, JSON.stringify(data.order));
+        } catch {
+          // ignore storage errors
+        }
+      }
+
       router.push(`/checkout/${data.order.id}`);
     } catch (err: unknown) {
       setErrorMessage(
