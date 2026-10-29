@@ -22,13 +22,28 @@ import {
   Loader2,
   Clock,
   Sparkles,
+  ChevronDown,
+  RefreshCw,
 } from "lucide-react";
+import { AirlineLogo } from "@/components/common/AirlineLogo";
+import { formatTimeWithAmPm } from "@/lib/timeUtils";
+import { FlightOption } from "@/lib/types";
 
 interface PassengerInput {
   title: "Mr" | "Mrs" | "Ms" | "Miss" | "Dr" | "Prof";
   first_name: string;
   last_name: string;
   passenger_type: "adult" | "child" | "infant";
+}
+
+interface SelectedFlightInfo {
+  flightNumber: string;
+  airlineName: string;
+  airlineCode: string;
+  departureTime: string;
+  arrivalTime: string;
+  duration: string;
+  aircraftType?: string;
 }
 
 function CreateFlowContent() {
@@ -77,12 +92,66 @@ function CreateFlowContent() {
   const [disclaimerAcknowledged, setDisclaimerAcknowledged] = useState(false);
 
   // Flight option details passed from search (if available)
-  const flightNumber = searchParams.get("flightNumber");
-  const airlineName = searchParams.get("airlineName");
-  const airlineCode = searchParams.get("airlineCode");
-  const departureTime = searchParams.get("departureTime");
-  const arrivalTime = searchParams.get("arrivalTime");
-  const duration = searchParams.get("duration");
+  const initialFlightNumber = searchParams.get("flightNumber");
+  const initialAirlineName = searchParams.get("airlineName");
+  const initialAirlineCode = searchParams.get("airlineCode");
+  const initialDepTime = searchParams.get("departureTime");
+  const initialArrTime = searchParams.get("arrivalTime");
+  const initialDuration = searchParams.get("duration");
+
+  const [selectedFlight, setSelectedFlight] = useState<SelectedFlightInfo | null>(
+    initialFlightNumber
+      ? {
+          flightNumber: initialFlightNumber,
+          airlineName: initialAirlineName || "International Carrier",
+          airlineCode: initialAirlineCode || "FL",
+          departureTime: initialDepTime || "09:30",
+          arrivalTime: initialArrTime || "13:15",
+          duration: initialDuration || "3h 45m",
+        }
+      : null
+  );
+
+  const [availableFlights, setAvailableFlights] = useState<FlightOption[]>([]);
+  const [loadingFlights, setLoadingFlights] = useState(false);
+  const [showFlightSelector, setShowFlightSelector] = useState(!initialFlightNumber);
+
+  // Auto fetch available flights for current route
+  React.useEffect(() => {
+    let isMounted = true;
+    const fromCode = origin.match(/\(([A-Z]{3})\)/)?.[1] || "LHE";
+    const toCode = destination.match(/\(([A-Z]{3})\)/)?.[1] || "DXB";
+
+    setLoadingFlights(true);
+    fetch(`/api/flights/search?from=${fromCode}&to=${toCode}&date=${departureDate}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted) {
+          const list: FlightOption[] = data.flights || [];
+          setAvailableFlights(list);
+          if (!selectedFlight && list.length > 0) {
+            const first = list[0];
+            setSelectedFlight({
+              flightNumber: first.flight_number,
+              airlineName: first.airline_name,
+              airlineCode: first.airline_code,
+              departureTime: first.departure_time,
+              arrivalTime: first.arrival_time,
+              duration: first.duration,
+              aircraftType: first.aircraft_type,
+            });
+          }
+          setLoadingFlights(false);
+        }
+      })
+      .catch(() => {
+        if (isMounted) setLoadingFlights(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [origin, destination, departureDate]);
 
   const currentPricePerPax = reservationPrice;
   const totalPrice = currentPricePerPax * passengers.length;
@@ -188,14 +257,14 @@ function CreateFlowContent() {
         guest_email: guestEmail,
         guest_name: `${passengers[0].first_name} ${passengers[0].last_name}`,
         passengers,
-        flight_option: flightNumber
+        flight_option: selectedFlight
           ? {
-              flight_number: flightNumber,
-              airline_name: airlineName || "International Carrier",
-              airline_code: airlineCode || "IA",
-              departure_time: departureTime || "09:30",
-              arrival_time: arrivalTime || "13:15",
-              duration: duration || "3h 45m",
+              flight_number: selectedFlight.flightNumber,
+              airline_name: selectedFlight.airlineName,
+              airline_code: selectedFlight.airlineCode,
+              departure_time: selectedFlight.departureTime,
+              arrival_time: selectedFlight.arrivalTime,
+              duration: selectedFlight.duration,
             }
           : undefined,
       };
@@ -412,27 +481,168 @@ function CreateFlowContent() {
                 </div>
               </div>
 
-              {/* Preselected Live Flight Option Summary (if passed from search) */}
-              {flightNumber && (
-                <div className="p-4 bg-[#E8F2FF]/60 border border-[#1769E0]/30 rounded-2xl flex items-center justify-between text-xs">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-9 h-9 rounded-xl bg-white border border-[#1769E0]/20 flex items-center justify-center font-bold text-[#1769E0]">
-                      {airlineCode || "FL"}
+              {/* Airline Flight Selection & Schedule Section */}
+              <div className="pt-2 border-t border-slate-100 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="block text-xs font-bold uppercase text-slate-700">
+                      Operating Airline & Schedule <span className="text-rose-500">*</span>
+                    </span>
+                    <span className="text-[11px] text-slate-400">
+                      Verified flight hold with airline booking code (PNR)
+                    </span>
+                  </div>
+                  {selectedFlight && (
+                    <button
+                      type="button"
+                      onClick={() => setShowFlightSelector(!showFlightSelector)}
+                      className="text-xs font-bold text-[#1769E0] hover:text-[#1255B8] flex items-center space-x-1"
+                    >
+                      <span>{showFlightSelector ? "Hide Options" : "Change Airline / Flight"}</span>
+                      <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showFlightSelector ? "rotate-180" : ""}`} />
+                    </button>
+                  )}
+                </div>
+
+                {/* Selected Flight Card */}
+                {selectedFlight ? (
+                  <div className="p-4 bg-gradient-to-r from-[#E8F2FF]/70 to-white border-2 border-[#1769E0]/40 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-2xs">
+                    <div className="flex items-center space-x-3.5">
+                      <AirlineLogo
+                        airlineCode={selectedFlight.airlineCode}
+                        airlineName={selectedFlight.airlineName}
+                        className="w-12 h-12"
+                        size={48}
+                      />
+                      <div>
+                        <div className="font-extrabold text-sm text-[#0B1F33] flex items-center space-x-2">
+                          <span>{selectedFlight.airlineName}</span>
+                          <span className="text-[10px] font-mono font-bold text-[#1769E0] bg-[#E8F2FF] px-2 py-0.5 rounded">
+                            {selectedFlight.flightNumber}
+                          </span>
+                        </div>
+                        <div className="text-slate-600 text-xs mt-0.5 font-semibold">
+                          {formatTimeWithAmPm(selectedFlight.departureTime)} → {formatTimeWithAmPm(selectedFlight.arrivalTime)}
+                          <span className="text-slate-400 font-normal"> · {selectedFlight.duration}</span>
+                        </div>
+                        {selectedFlight.aircraftType && (
+                          <div className="text-[10px] text-slate-400 mt-0.5">
+                            Aircraft: {selectedFlight.aircraftType}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    <div>
-                      <div className="font-bold text-[#0B1F33]">
-                        {airlineName} Flight {flightNumber}
-                      </div>
-                      <div className="text-slate-500 text-[11px]">
-                        Depart: {departureTime} · Arrive: {arrivalTime} ({duration})
-                      </div>
+
+                    <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-1.5 shrink-0">
+                      <span className="inline-flex items-center space-x-1.5 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        <span>Live Schedule Selected</span>
+                      </span>
+                      <a
+                        href={`https://www.google.com/travel/flights?q=${encodeURIComponent(`${selectedFlight.airlineName} ${selectedFlight.flightNumber}`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10px] font-bold text-[#1769E0] hover:underline"
+                      >
+                        Verify on Google Flights ↗
+                      </a>
                     </div>
                   </div>
-                  <span className="text-[10px] uppercase font-bold text-[#1769E0] bg-white px-2.5 py-1 rounded-full border border-[#1769E0]/20">
-                    Live Route Selected
-                  </span>
-                </div>
-              )}
+                ) : (
+                  <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl text-xs text-amber-900 font-semibold flex items-center space-x-2">
+                    <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
+                    <span>Please select an available airline flight below to proceed.</span>
+                  </div>
+                )}
+
+                {/* Available Flights List (when changing or when no flight selected) */}
+                {showFlightSelector && (
+                  <div className="mt-3 p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3 animate-in fade-in duration-200">
+                    <div className="flex items-center justify-between text-xs font-bold text-[#0B1F33]">
+                      <span>Available Scheduled Flights ({availableFlights.length})</span>
+                      {loadingFlights && (
+                        <span className="text-slate-400 flex items-center space-x-1">
+                          <Loader2 className="w-3 h-3 animate-spin text-[#1769E0]" />
+                          <span>Syncing airline radars...</span>
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
+                      {availableFlights.map((flight) => {
+                        const isChosen = selectedFlight?.flightNumber === flight.flight_number;
+                        return (
+                          <div
+                            key={flight.id}
+                            onClick={() => {
+                              setSelectedFlight({
+                                flightNumber: flight.flight_number,
+                                airlineName: flight.airline_name,
+                                airlineCode: flight.airline_code,
+                                departureTime: flight.departure_time,
+                                arrivalTime: flight.arrival_time,
+                                duration: flight.duration,
+                                aircraftType: flight.aircraft_type,
+                              });
+                              setShowFlightSelector(false);
+                            }}
+                            className={`p-3 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${
+                              isChosen
+                                ? "bg-white border-[#1769E0] shadow-xs ring-1 ring-[#1769E0]"
+                                : "bg-white border-slate-200 hover:border-[#1769E0]/60 hover:bg-slate-50/80"
+                            }`}
+                          >
+                            <div className="flex items-center space-x-3">
+                              <AirlineLogo
+                                airlineCode={flight.airline_code}
+                                airlineName={flight.airline_name}
+                                className="w-9 h-9"
+                                size={36}
+                              />
+                              <div>
+                                <div className="text-xs font-bold text-[#0B1F33] flex items-center space-x-1.5">
+                                  <span>{flight.airline_name}</span>
+                                  <span className="text-[10px] font-mono font-bold text-[#1769E0] bg-[#E8F2FF] px-1.5 py-0.5 rounded">
+                                    {flight.flight_number}
+                                  </span>
+                                </div>
+                                <div className="text-[11px] text-slate-600 font-semibold mt-0.5">
+                                  {formatTimeWithAmPm(flight.departure_time)} → {formatTimeWithAmPm(flight.arrival_time)}
+                                  <span className="text-slate-400 font-normal"> ({flight.duration})</span>
+                                </div>
+                              </div>
+                            </div>
+
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedFlight({
+                                  flightNumber: flight.flight_number,
+                                  airlineName: flight.airline_name,
+                                  airlineCode: flight.airline_code,
+                                  departureTime: flight.departure_time,
+                                  arrivalTime: flight.arrival_time,
+                                  duration: flight.duration,
+                                  aircraftType: flight.aircraft_type,
+                                });
+                                setShowFlightSelector(false);
+                              }}
+                              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                                isChosen
+                                  ? "bg-emerald-600 text-white"
+                                  : "bg-slate-100 hover:bg-[#1769E0] hover:text-white text-slate-700"
+                              }`}
+                            >
+                              {isChosen ? "Selected ✓" : "Select"}
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
 
               {/* Action Buttons */}
               <div className="pt-6 flex justify-end">
@@ -655,6 +865,17 @@ function CreateFlowContent() {
                     <span className="text-slate-400 font-bold block text-[10px] uppercase">Delivery Email</span>
                     <span className="font-bold text-[#0B1F33]">{guestEmail}</span>
                   </div>
+                  {selectedFlight && (
+                    <div className="sm:col-span-2 pt-2 border-t border-slate-200/60 flex items-center space-x-2.5">
+                      <AirlineLogo airlineCode={selectedFlight.airlineCode} airlineName={selectedFlight.airlineName} className="w-8 h-8" size={32} />
+                      <div>
+                        <span className="text-slate-400 font-bold block text-[10px] uppercase">Selected Airline Flight</span>
+                        <span className="font-bold text-[#0B1F33] text-xs">
+                          {selectedFlight.airlineName} ({selectedFlight.flightNumber}) · {formatTimeWithAmPm(selectedFlight.departureTime)} → {formatTimeWithAmPm(selectedFlight.arrivalTime)}
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 

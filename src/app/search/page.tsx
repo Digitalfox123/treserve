@@ -16,8 +16,11 @@ import {
   Radio,
   ShieldCheck,
   Sparkles,
+  ExternalLink,
 } from "lucide-react";
 import { FlightOption } from "@/lib/types";
+import { AirlineLogo } from "@/components/common/AirlineLogo";
+import { formatTimeWithAmPm } from "@/lib/timeUtils";
 
 function SearchResultsContent() {
   const searchParams = useSearchParams();
@@ -96,9 +99,8 @@ function SearchResultsContent() {
     return true;
   });
 
-  const handleSelectFlight = (flight: FlightOption, service: "itinerary" | "temporary_reservation") => {
+  const handleSelectFlight = (flight: FlightOption) => {
     const params = new URLSearchParams({
-      service,
       tripType,
       from: fromCity ? `${fromCity} (${from})` : from,
       to: toCity ? `${toCity} (${to})` : to,
@@ -302,10 +304,13 @@ function SearchResultsContent() {
                 {/* Airline & Schedule Info */}
                 <div className="space-y-4 flex-1">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 rounded-xl bg-[#E8F2FF] text-[#1769E0] font-black text-xs flex items-center justify-center shadow-2xs border border-[#1769E0]/20">
-                        {flight.airline_code}
-                      </div>
+                    <div className="flex items-center space-x-3.5">
+                      <AirlineLogo
+                        airlineCode={flight.airline_code}
+                        airlineName={flight.airline_name}
+                        className="w-12 h-12"
+                        size={56}
+                      />
                       <div>
                         <div className="text-sm sm:text-base font-bold text-[#0B1F33] flex items-center space-x-2">
                           <span>{flight.airline_name}</span>
@@ -313,10 +318,10 @@ function SearchResultsContent() {
                             {flight.flight_number}
                           </span>
                         </div>
-                        <div className="text-[11px] text-slate-400 mt-0.5">
-                          {flight.aircraft_type}
-                          {flight.terminal_departure && ` · Departs Terminal ${flight.terminal_departure}`}
-                          {flight.terminal_arrival && ` · Arrives Terminal ${flight.terminal_arrival}`}
+                        <div className="text-[11px] text-slate-500 mt-0.5 flex flex-wrap items-center gap-x-2">
+                          <span>{flight.aircraft_type}</span>
+                          {flight.terminal_departure && <span>· Departs T{flight.terminal_departure}</span>}
+                          {flight.terminal_arrival && <span>· Arrives T{flight.terminal_arrival}</span>}
                         </div>
                       </div>
                     </div>
@@ -327,11 +332,11 @@ function SearchResultsContent() {
                     </div>
                   </div>
 
-                  {/* Flight Timing Diagram */}
+                  {/* Flight Timing Diagram with AM/PM */}
                   <div className="flex items-center space-x-6 pt-1">
                     <div>
                       <div className="text-xl sm:text-2xl font-black text-[#0B1F33]">
-                        {flight.departure_time}
+                        {formatTimeWithAmPm(flight.departure_time)}
                       </div>
                       <div className="text-xs font-semibold text-slate-600">
                         {flight.departure_city} ({from})
@@ -352,38 +357,44 @@ function SearchResultsContent() {
 
                     <div>
                       <div className="text-xl sm:text-2xl font-black text-[#0B1F33]">
-                        {flight.arrival_time}
+                        {formatTimeWithAmPm(flight.arrival_time)}
                       </div>
                       <div className="text-xs font-semibold text-slate-600">
                         {flight.arrival_city} ({to})
                       </div>
                     </div>
                   </div>
+
+                  {/* Flight Verification Link */}
+                  <div className="flex items-center space-x-2 pt-1 text-[11px] text-slate-500">
+                    <a
+                      href={`https://www.google.com/travel/flights?q=${encodeURIComponent(`${flight.airline_name} ${flight.flight_number} ${from} to ${to}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center space-x-1 text-[#1769E0] hover:text-[#1255B8] font-bold hover:underline transition-colors"
+                      title="Verify this exact flight schedule on Google Flights"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span>Verify on Google Flights</span>
+                    </a>
+                    <span className="text-slate-300">·</span>
+                    <span className="text-slate-400">GDS Airline Verified</span>
+                  </div>
                 </div>
 
-                {/* Document Creation CTA Buttons */}
-                <div className="md:border-l md:border-slate-100 md:pl-6 flex flex-col justify-center space-y-2.5 min-w-[220px]">
-                  <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
-                    Select Documentation:
+                {/* Single Select Flight CTA Button */}
+                <div className="md:border-l md:border-slate-100 md:pl-6 flex flex-col justify-center space-y-2 min-w-[200px]">
+                  <button
+                    type="button"
+                    onClick={() => handleSelectFlight(flight)}
+                    className="w-full py-3 px-5 bg-[#1769E0] hover:bg-[#1255B8] active:scale-[0.99] text-white text-xs sm:text-sm font-bold rounded-xl shadow-xs hover:shadow-md transition-all flex items-center justify-center space-x-2"
+                  >
+                    <span>Select Flight</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                  <div className="text-center text-[10px] font-semibold text-slate-400">
+                    Temporary Flight Reservation
                   </div>
-
-                  <button
-                    type="button"
-                    onClick={() => handleSelectFlight(flight, "itinerary")}
-                    className="w-full py-2.5 px-4 bg-[#1769E0] hover:bg-[#1255B8] text-white text-xs font-bold rounded-xl shadow-xs transition-colors flex items-center justify-between"
-                  >
-                    <span>Itinerary Document</span>
-                    <span className="font-extrabold">$25</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleSelectFlight(flight, "temporary_reservation")}
-                    className="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-xs transition-colors flex items-center justify-between"
-                  >
-                    <span>Temporary Reservation</span>
-                    <span className="font-extrabold">$50</span>
-                  </button>
                 </div>
               </div>
             ))

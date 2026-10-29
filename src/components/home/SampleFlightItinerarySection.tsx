@@ -236,11 +236,11 @@ export function SampleFlightItinerarySection() {
                       <div className="text-[9px] text-slate-400">Emirates (Codeshare)</div>
                     </div>
                     <div className="col-span-4 text-slate-700">
-                      <div className="font-semibold">LHR 14:20</div>
+                      <div className="font-semibold">LHR 02:20 PM</div>
                       <div className="text-[9px] text-slate-400">London Heathrow</div>
                     </div>
                     <div className="col-span-3 text-slate-700">
-                      <div className="font-semibold">DXB 00:30 +1</div>
+                      <div className="font-semibold">DXB 12:30 AM (+1)</div>
                       <div className="text-[9px] text-slate-400">Dubai Intl T3</div>
                     </div>
                     <div className="col-span-2 text-right text-slate-600 text-[10px]">
@@ -407,11 +407,11 @@ export function SampleFlightItinerarySection() {
                         <div className="text-[10px] text-slate-400">Emirates Partner</div>
                       </div>
                       <div className="col-span-3">
-                        <div className="font-bold text-slate-800">14:20 Nov 24</div>
+                        <div className="font-bold text-slate-800">02:20 PM Nov 24</div>
                         <div className="text-[10px] text-slate-400">LHR Terminal 3</div>
                       </div>
                       <div className="col-span-3">
-                        <div className="font-bold text-slate-800">00:30 Nov 25</div>
+                        <div className="font-bold text-slate-800">12:30 AM Nov 25 (+1)</div>
                         <div className="text-[10px] text-slate-400">DXB Terminal 3</div>
                       </div>
                       <div className="col-span-3 text-right">

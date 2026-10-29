@@ -20,8 +20,8 @@ export default function ServicesPage() {
         "Instant delivery upon booking confirmation",
       ],
       price: "$35",
-      cta: "Book Visa Reservation",
-      href: "/create?type=visa",
+      cta: "Find Flights & Book",
+      href: "/search?service=visa&from=LHE&to=DXB&departureDate=2026-11-24",
     },
     {
       badge: "Service 02 · Airport Check-in & Border Control",
@@ -36,8 +36,8 @@ export default function ServicesPage() {
         "Full passenger details matching your travel passport",
       ],
       price: "$35",
-      cta: "Book Onward Flight",
-      href: "/create?type=onward",
+      cta: "Find Flights & Book",
+      href: "/search?service=onward&from=LHE&to=DXB&departureDate=2026-11-24",
     },
     {
       badge: "Service 03 · Complex & Multi-Destination Itineraries",
@@ -52,8 +52,8 @@ export default function ServicesPage() {
         "Ideal for Schengen multi-state travel visas",
       ],
       price: "$50",
-      cta: "Book Multi-City",
-      href: "/create?tripType=multi-city",
+      cta: "Find Flights & Book",
+      href: "/search?service=multicity&from=LHE&to=DXB&departureDate=2026-11-24&tripType=multi-city",
     },
   ];
 
