@@ -364,56 +364,7 @@ export async function generateOrderPdf(order: Order): Promise<Uint8Array> {
 
   y -= 18;
 
-  // 7. SUPPLIER / RESERVATION VALIDITY BOX (FOR EMBASSY CONFIRMATION)
-  if (isReservation) {
-    const suppH = 40;
-    page.drawRectangle({
-      x: marginX,
-      y: y - suppH,
-      width: contentWidth,
-      height: suppH,
-      color: lightBg,
-      borderColor: borderGray,
-      borderWidth: 0.8,
-    });
-
-    page.drawText("RESERVATION & SUPPLIER VERIFICATION RECORD", {
-      x: marginX + 12,
-      y: y - 13,
-      size: 7.5,
-      font: fontBold,
-      color: navy,
-    });
-
-    const suppRef = order.reservation_record?.supplier_reference || `SUP-${order.id.slice(-6).toUpperCase()}`;
-    page.drawText(`Supplier Network: Authorized Consortia GDS`, {
-      x: marginX + 12,
-      y: y - 26,
-      size: 7.5,
-      font: fontRegular,
-      color: grayDark,
-    });
-
-    page.drawText(`Supplier Reference: ${suppRef}`, {
-      x: marginX + 230,
-      y: y - 26,
-      size: 7.5,
-      font: fontBold,
-      color: primaryBlue,
-    });
-
-    page.drawText(`Hold Validity: 48 Hours for Visa Submission`, {
-      x: marginX + 360,
-      y: y - 26,
-      size: 7.5,
-      font: fontRegular,
-      color: emerald,
-    });
-
-    y -= suppH + 16;
-  }
-
-  // 8. OFFICIAL TERMS & TRAVEL NOTICE (WITH MANDATORY DISCLAIMER INTEGRATED NEATLY AT THE BOTTOM)
+  // 7. OFFICIAL TERMS & TRAVEL NOTICE
   const termsH = 68;
   page.drawRectangle({
     x: marginX,
@@ -433,15 +384,15 @@ export async function generateOrderPdf(order: Order): Promise<Uint8Array> {
     color: navy,
   });
 
-  // Mandatory Disclaimer Text (Cleanly printed in bold inside the terms box)
+  // Mandatory Disclaimer Text (Uniform elegant gray text matching other terms)
   const mandatoryNotice =
     "Our service provides temporary reservations for visa documentation only. We do not guarantee visa approval. These are NOT actual flight tickets and are NOT valid for boarding.";
   page.drawText(`1. Mandatory Policy: ${mandatoryNotice}`, {
     x: marginX + 12,
     y: y - 26,
     size: 7,
-    font: fontBold,
-    color: rgb(153 / 255, 27 / 255, 27 / 255), // refined crimson
+    font: fontRegular,
+    color: grayDark,
     maxWidth: contentWidth - 24,
     lineHeight: 9.5,
   });

@@ -427,7 +427,7 @@ export function SampleFlightItinerarySection() {
                   <div className="font-bold text-[#0B1F33] uppercase">
                     Important Travel Documentation Terms & Notice
                   </div>
-                  <p className="text-rose-700 font-bold">
+                  <p className="text-slate-600 font-medium">
                     1. Mandatory Policy: Our service provides temporary reservations for visa documentation only. We
                     do not guarantee visa approval. These are NOT actual flight tickets and are NOT valid for boarding.
                   </p>
