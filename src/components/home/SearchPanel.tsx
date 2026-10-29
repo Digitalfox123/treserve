@@ -174,7 +174,7 @@ export function SearchPanel() {
 
             {/* Passenger & Cabin Dropdown Menu */}
             {showPaxDropdown && (
-              <div className="absolute right-0 top-full mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-slate-200 p-5 z-50 space-y-4">
+              <div className="absolute left-0 sm:left-auto sm:right-0 top-full mt-2 w-72 max-w-[calc(100vw-2.5rem)] bg-white rounded-2xl shadow-2xl border border-slate-200 p-4 sm:p-5 z-50 space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-xs font-bold text-[#0B1F33]">Adults</div>
@@ -286,7 +286,7 @@ export function SearchPanel() {
 
                 {/* From Autocomplete Dropdown */}
                 {showFromDropdown && (
-                  <div className="absolute left-0 top-full mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-slate-200 p-3 z-[60] max-h-72 overflow-y-auto">
+                  <div className="absolute left-0 top-full mt-2 w-80 max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-slate-200 p-3 z-[60] max-h-72 overflow-y-auto">
                     <div className="px-2 py-1.5 mb-2 border-b border-slate-100 flex items-center space-x-2">
                       <Search className="w-3.5 h-3.5 text-slate-400" />
                       <input
@@ -358,7 +358,7 @@ export function SearchPanel() {
 
                 {/* To Autocomplete Dropdown */}
                 {showToDropdown && (
-                  <div className="absolute left-0 top-full mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-slate-200 p-3 z-[60] max-h-72 overflow-y-auto">
+                  <div className="absolute left-0 sm:right-0 sm:left-auto top-full mt-2 w-80 max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-slate-200 p-3 z-[60] max-h-72 overflow-y-auto">
                     <div className="px-2 py-1.5 mb-2 border-b border-slate-100 flex items-center space-x-2">
                       <Search className="w-3.5 h-3.5 text-slate-400" />
                       <input
