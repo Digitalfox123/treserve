@@ -1,9 +1,19 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MandatoryDisclaimer } from "@/components/common/MandatoryDisclaimer";
 import { FileText, Plane, CreditCard, Download, ArrowRight, ShieldCheck } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "How It Works — Fast, Verifiable Flight Reservations | Treserve",
+  description:
+    "Learn how Treserve creates verified flight reservations and PNR codes for embassy visa applications in 3 simple steps.",
+  alternates: {
+    canonical: "/how-it-works",
+  },
+};
 
 export default function HowItWorksPage() {
   const detailedSteps = [

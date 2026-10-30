@@ -1,9 +1,19 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MandatoryDisclaimer } from "@/components/common/MandatoryDisclaimer";
 import { FileText, Check, ArrowRight, ShieldCheck } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Flight Itinerary Document for Visa Applications | Treserve",
+  description:
+    "Official flight itinerary schedule document formatted specifically for embassy visa applications and travel planning.",
+  alternates: {
+    canonical: "/itinerary",
+  },
+};
 
 export default function ItineraryServicePage() {
   return (

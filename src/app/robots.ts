@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next";
+import { getBaseUrl } from "@/lib/siteConfig";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://treserve.com";
+  const baseUrl = getBaseUrl();
 
   return {
     rules: [
@@ -15,11 +16,11 @@ export default function robots(): MetadataRoute.Robots {
           "/admin/",
           "/dashboard",
           "/dashboard/",
-          "/api/admin/",
-          "/api/documents/",
-          "/api/test-payments",
+          "/register",
+          "/sign-in",
           "/checkout/",
           "/order/",
+          "/api/",
         ],
       },
     ],

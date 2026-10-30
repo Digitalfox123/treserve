@@ -1,7 +1,17 @@
 import React from "react";
+import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MandatoryDisclaimer } from "@/components/common/MandatoryDisclaimer";
+
+export const metadata: Metadata = {
+  title: "Terms of Service | Treserve",
+  description:
+    "Official terms and conditions governing the use of Treserve temporary flight reservation services.",
+  alternates: {
+    canonical: "/terms",
+  },
+};
 
 export default function TermsPage() {
   return (

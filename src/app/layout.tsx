@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { getBaseUrl } from "@/lib/siteConfig";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -9,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://treserve.com"),
+  metadataBase: new URL(getBaseUrl()),
   title: {
     default: "Treserve — Verifiable Temporary Flight Reservation for Visa & Onward Travel",
     template: "%s | Treserve",
@@ -30,12 +31,9 @@ export const metadata: Metadata = {
     "onward ticket reservation",
     "verifiable flight ticket hold",
   ],
-  authors: [{ name: "Treserve Flight Reservation Services", url: "https://treserve.com" }],
+  authors: [{ name: "Treserve Flight Reservation Services", url: "https://treserve.vercel.app" }],
   creator: "Treserve",
   publisher: "Treserve Travel Technologies",
-  alternates: {
-    canonical: "/",
-  },
   robots: {
     index: true,
     follow: true,
@@ -68,7 +66,7 @@ export const metadata: Metadata = {
     title: "Treserve — Verifiable Temporary Flight Reservation for Visa & Onward Travel",
     description:
       "Get genuine, verifiable temporary flight reservations with live PNR code for Schengen, US, UK, Canada & worldwide embassy visa applications or proof of onward travel.",
-    url: "https://treserve.com",
+    url: "https://treserve.vercel.app",
     siteName: "Treserve",
     locale: "en_US",
     type: "website",
@@ -100,8 +98,8 @@ const jsonLdOrganization = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Treserve",
-  url: "https://treserve.com",
-  logo: "https://treserve.com/images/app-icon.png",
+  url: "https://treserve.vercel.app",
+  logo: "https://treserve.vercel.app/images/app-icon.png",
   description:
     "Official provider of verifiable temporary flight reservations and PNR bookings for international visa applications and proof of onward travel.",
   sameAs: [],
@@ -116,10 +114,10 @@ const jsonLdWebsite = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Treserve",
-  url: "https://treserve.com",
+  url: "https://treserve.vercel.app",
   potentialAction: {
     "@type": "SearchAction",
-    target: "https://treserve.com/create?from={from}&to={to}",
+    target: "https://treserve.vercel.app/create?from={from}&to={to}",
     "query-input": "required name=from",
   },
 };
@@ -134,15 +132,15 @@ const jsonLdService = {
   provider: {
     "@type": "Organization",
     name: "Treserve",
-    url: "https://treserve.com",
+    url: "https://treserve.vercel.app",
   },
   areaServed: "Worldwide",
   offers: {
     "@type": "Offer",
-    price: "35.00",
+    price: "10.00",
     priceCurrency: "USD",
     availability: "https://schema.org/InStock",
-    url: "https://treserve.com/create",
+    url: "https://treserve.vercel.app/create",
   },
 };
 

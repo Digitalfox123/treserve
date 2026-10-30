@@ -1,6 +1,16 @@
 import React from "react";
+import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+
+export const metadata: Metadata = {
+  title: "Refund & Cancellation Policy | Treserve",
+  description:
+    "Review our transparent refund and cancellation guidelines for temporary flight reservations.",
+  alternates: {
+    canonical: "/refund-policy",
+  },
+};
 
 export default function RefundPolicyPage() {
   return (

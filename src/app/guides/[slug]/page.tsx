@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { getGuideBySlug, getAllGuides } from "@/lib/guides";
@@ -22,6 +23,31 @@ interface GuidePageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export async function generateMetadata({ params }: GuidePageProps): Promise<Metadata> {
+  const resolvedParams = await params;
+  const guide = getGuideBySlug(resolvedParams.slug);
+  if (!guide) return {};
+
+  return {
+    title: `${guide.title} | Treserve Guides`,
+    description: guide.excerpt,
+    alternates: {
+      canonical: `/guides/${guide.slug}`,
+    },
+    openGraph: {
+      title: `${guide.title} | Treserve Guides`,
+      description: guide.excerpt,
+      url: `/guides/${guide.slug}`,
+      images: [
+        {
+          url: guide.image,
+          alt: guide.imageAlt,
+        },
+      ],
+    },
+  };
 }
 
 export async function generateStaticParams() {

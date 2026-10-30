@@ -10,6 +10,9 @@ export const metadata = {
   title: "Travel & Visa Documentation Guides | Treserve",
   description:
     "Comprehensive, practical guides about flight itineraries, temporary reservations, onward travel regulations, and embassy documentation practices.",
+  alternates: {
+    canonical: "/guides",
+  },
 };
 
 export default function GuidesIndexPage() {

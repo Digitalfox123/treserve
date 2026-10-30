@@ -1,4 +1,5 @@
 import React from "react";
+import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/home/HeroSection";
@@ -13,6 +14,12 @@ import { PricingComparisonSection } from "@/components/home/PricingComparisonSec
 import { TravelGuidesSection } from "@/components/home/TravelGuidesSection";
 import { FaqSection } from "@/components/home/FaqSection";
 import { MandatoryDisclaimer } from "@/components/common/MandatoryDisclaimer";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function HomePage() {
   return (

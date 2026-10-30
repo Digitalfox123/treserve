@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "Flight Reservation Pricing — $10 Flat Rate | Treserve",
   description:
     "Official verifiable flight reservation for visa applications for just $10 flat fee. Instant A4 PDF download with live airline PNR code.",
+  alternates: {
+    canonical: "/pricing",
+  },
 };
 
 export default function PricingPage() {

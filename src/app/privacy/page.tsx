@@ -1,6 +1,16 @@
 import React from "react";
+import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+
+export const metadata: Metadata = {
+  title: "Privacy & Data Policy | Treserve",
+  description:
+    "Learn how Treserve protects your booking details and personal data under international data protection laws.",
+  alternates: {
+    canonical: "/privacy",
+  },
+};
 
 export default function PrivacyPage() {
   return (

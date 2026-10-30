@@ -1,9 +1,19 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MandatoryDisclaimer } from "@/components/common/MandatoryDisclaimer";
 import { CalendarCheck, Check, ArrowRight, ShieldAlert } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Temporary Flight Reservation for Visa | Treserve",
+  description:
+    "Verifiable temporary flight reservation with live airline PNR code for Schengen, US, UK, Canada & worldwide embassy visa applications.",
+  alternates: {
+    canonical: "/temporary-reservation",
+  },
+};
 
 export default function TemporaryReservationServicePage() {
   return (

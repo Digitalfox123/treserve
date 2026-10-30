@@ -1,7 +1,17 @@
 import React from "react";
+import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MandatoryDisclaimer } from "@/components/common/MandatoryDisclaimer";
+
+export const metadata: Metadata = {
+  title: "Official Service Disclaimer | Treserve",
+  description:
+    "Official regulatory disclaimer regarding flight reservations, itineraries, and embassy visa application compliance.",
+  alternates: {
+    canonical: "/disclaimer",
+  },
+};
 
 export default function DisclaimerPage() {
   return (
