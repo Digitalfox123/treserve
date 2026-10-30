@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "google-site-verification-placeholder",
+    google: "5ZqaAx_5Fv3AF5tngGgvAgWh0yWCVDAV3QN4WJSSd58",
     other: {
       "msvalidate.01": "bing-site-verification-placeholder",
     },
