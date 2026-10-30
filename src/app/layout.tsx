@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   verification: {
     google: "5ZqaAx_5Fv3AF5tngGgvAgWh0yWCVDAV3QN4WJSSd58",
     other: {
-      "msvalidate.01": "bing-site-verification-placeholder",
+      "msvalidate.01": "B24AAC24D406AC099F2095CC9B50F6D4",
     },
   },
   icons: {
